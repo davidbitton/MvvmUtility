@@ -1,0 +1,48 @@
+﻿<UserControl x:Class="MvvmUtility.Infrastructure.Interactivity.ChildWindow"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:Interactivity="clr-namespace:MvvmUtility.Infrastructure.Interactivity" mc:Ignorable="d"
+             x:Name="childWindow" Loaded="ChildWindow_OnLoaded"
+             d:DesignHeight="300" d:DesignWidth="300">
+    <Grid x:Name="LayoutRoot" Background="#88000000">
+        <Grid.Style>
+            <Style TargetType="{x:Type Grid}">
+                <Style.Triggers>
+                    <DataTrigger Binding="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Interactivity:ChildWindow}}, Path=Visibility}" Value="Visible">
+                        <DataTrigger.EnterActions>
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <!--ColorAnimation
+                                        Storyboard.TargetProperty="Background.Color" 
+                                        Duration="0:0:0.75" 
+                                        FillBehavior="Stop"
+                                        From="Transparent"
+                                    /-->
+									<DoubleAnimation Storyboard.TargetProperty="Opacity" From="0.0" To="1.0" Duration="0:0:0.2"/>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </DataTrigger.EnterActions>
+                    </DataTrigger>
+                </Style.Triggers>
+            </Style>
+        </Grid.Style>
+        <Border HorizontalAlignment="Center" VerticalAlignment="Center" BorderBrush="#FFBFBFBF" CornerRadius="4" Background="White">
+        	<Border.Effect>
+        		<DropShadowEffect/>
+        	</Border.Effect>
+            <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <StackPanel Grid.Row="0" Orientation="Horizontal" Background="#FF606060">
+                    <Label Content="{Binding Path=Title}" Foreground="White"/>
+                </StackPanel>
+                <ContentControl Grid.Row="1" x:Name="ClientArea" 
+        		ContentTemplate="{Binding ClientTemplate, ElementName=childWindow}"
+        		Content="{Binding Content}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            </Grid>
+        </Border>
+    </Grid>
+</UserControl>
