@@ -14,3 +14,6 @@ The purpose for this is to be able to fire each CanExecute method for [ICommand]
 call.
 
 Author	:	David B. Bitton (david@codenoevil.com)
+
+
+[PrismCommandRegistry]: https://github.com/davidbitton/MvvmUtility/blob/master/Infrastructure/Commanding/PrismCommandRegistry.cs
